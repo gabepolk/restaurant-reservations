@@ -1,0 +1,44 @@
+<html>
+<head>
+  <title>Restaurant Reservations</title>
+</head>
+<body>
+
+<button id="claim">Claim a Reservations</button>
+<button id="reserve">Make a Reservations</button>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript">
+
+var reservations = {
+  'Billy': { claimed: false }
+};
+
+$('#claim').on('click', function (e) {
+  var name = prompt("What is your name?");
+  if (reservations.hasOwnProperty(name) == false) {
+    alert("Sorry, we couldn't find a reservation under that name.")
+  }
+  else if (reservations[name]['claimed'] == false) {
+    reservations[name]['claimed'] = true
+    alert("Thanks for making reservations, we will seat you right away!")
+  }
+  else if (reservations[name]['claimed'] == true){
+    alert("Sorry, it looks like this reservation has already been claimed.")
+  }
+});
+
+$('#reserve').on('click', function (e) {
+  var name = prompt("What name should we reserve under?");
+  if (reservations.hasOwnProperty(name) == true && reservations[name]['claimed'] == false ) {
+    alert("Sorry, you must use a different name.")
+  }
+  else {
+    reservations[name] = { claimed: false }
+  }
+});
+
+
+</script>
+</body>
+</html>
